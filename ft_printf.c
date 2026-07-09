@@ -6,7 +6,7 @@
 /*   By: lucferre <lucferre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/04 16:23:33 by lucferre          #+#    #+#             */
-/*   Updated: 2026/07/09 01:16:09 by lucferre         ###   ########.fr       */
+/*   Updated: 2026/07/09 02:16:23 by lucferre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,16 @@ static long	ft_puthex(long n, int u)
 	c = 0;
 	if (n > 15)
 		c += ft_puthex(n / 16, u);
-	
+	write(1, &base[n % 16], 1);
+	return (c += 1);
 }
 
 static void	detect_format(va_list p_args, char f)
 {
-	char	c;
-	char	*s;
-	int		i;
-	long	l;
+	char			c;
+	char			*s;
+	int				i;
+	unsigned long	l;
 
 	if (f == 'c')
 	{
@@ -51,15 +52,22 @@ static void	detect_format(va_list p_args, char f)
 	else if (f == 's')
 	{
 		s = va_arg(p_args, char *);
-		ft_putstr(s);
-		// while (*s != '\0')
-		// 	write(1, s++, 1);
+		if (s == NULL)
+			write(1, "(null)", 6);
+		else
+			ft_putstr(s);
 	}
 	else if (f == 'p')
 	{
 		s = va_arg(p_args, void *);
-		l = s;
-		ft_puthex(l, 0);
+		l = (unsigned long) s;
+		if (l == 0)
+			write(1, "(nil)", 5);
+		else
+		{
+			write(1, "0x", 2);
+			ft_puthex(l, 0);
+		}
 	}
 	else if (f == 'd' || f == 'i')
 	{
@@ -101,8 +109,8 @@ int	main(void)
 
 	numero = 42;
 	ponteiro = &numero;
-	printf("teste%p\n", (void *)&numero);
-	printf("teste%p\n", (void *)ponteiro);
+	printf("teste%s\n", (void *)ponteiro);
+	ft_printf("teste%s\n", (void *)ponteiro);
 	ft_printf("teste%d\n", -2);
 	return (0);
 }
