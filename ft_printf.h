@@ -6,7 +6,7 @@
 /*   By: lucferre <lucferre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/04 18:27:44 by lucferre          #+#    #+#             */
-/*   Updated: 2026/07/05 14:30:42 by lucferre         ###   ########.fr       */
+/*   Updated: 2026/07/09 02:59:09 by lucferre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdarg.h>
 # include "./Libft/libft.h"
 
-int	ft_printf(const char *f, ...);
+int		ft_printf(const char *f, ...);
+char	*ft_utoa(unsigned int n);
 
 #endif
