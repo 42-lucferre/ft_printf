@@ -6,7 +6,7 @@
 /*   By: lucferre <lucferre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/04 16:23:33 by lucferre          #+#    #+#             */
-/*   Updated: 2026/07/09 03:20:58 by lucferre         ###   ########.fr       */
+/*   Updated: 2026/07/09 03:29:38 by lucferre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,18 @@ static void	detect_format(va_list p_args, char f)
 		s = ft_utoa(u);
 		ft_putstr(s);
 	}
+	else if (f == 'x')
+	{
+		u = va_arg(p_args, unsigned int);
+		ft_puthex(u, 0);
+	}
+	else if (f == 'X')
+	{
+		u = va_arg(p_args, unsigned int);
+		ft_puthex(u, 1);
+	}
+	else if (f == '%')
+		write(1, "%%", 1);
 }
 
 int	ft_printf(const char *f, ...)
@@ -114,10 +126,10 @@ int	main(void)
 	unsigned int	numero;
 	unsigned int	*ponteiro;
 
-	numero = 0;
+	numero = 489;
 	ponteiro = &numero;
-	printf("teste%u\n", *ponteiro);
-	ft_printf("teste%u\n", *ponteiro);
+	printf("teste%X\n", *ponteiro);
+	ft_printf("teste%X\n", *ponteiro);
 	ft_printf("teste%d\n", -2);
 	return (0);
 }
