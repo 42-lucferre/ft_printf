@@ -6,25 +6,30 @@
 /*   By: lucferre <lucferre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/04 16:23:33 by lucferre          #+#    #+#             */
-/*   Updated: 2026/07/09 03:29:38 by lucferre         ###   ########.fr       */
+/*   Updated: 2026/07/09 23:14:30 by lucferre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	ft_putstr(char *p)
+int	ft_putstr(char *p)
 {
+	int	c;
+
+	c = 0;
 	while (*p != '\0')
 	{
 		write(1, p, 1);
 		p++;
+		c++;
 	}
+	return (c);
 }
 
-static long	ft_puthex(long n, int u)
+int	ft_puthex(long n, int u)
 {
 	char	*base;
-	long	c;
+	int		c;
 
 	if (u)
 		base = "0123456789ABCDEF";
@@ -34,102 +39,64 @@ static long	ft_puthex(long n, int u)
 	if (n > 15)
 		c += ft_puthex(n / 16, u);
 	write(1, &base[n % 16], 1);
-	return (c += 1);
+	return (c + 1);
 }
 
-static void	detect_format(va_list p_args, char f)
+static int	detect_format(va_list p_args, char f)
 {
 	char			c;
-	char			*s;
-	int				i;
-	unsigned long	l;
-	unsigned int	u;
 
 	if (f == 'c')
 	{
 		c = (char)(va_arg(p_args, int));
-		write(1, &c, 1);
+		return (write(1, &c, 1));
 	}
 	else if (f == 's')
-	{
-		s = va_arg(p_args, char *);
-		if (s == NULL)
-			write(1, "(null)", 6);
-		else
-			ft_putstr(s);
-	}
+		return (f_string(p_args));
 	else if (f == 'p')
-	{
-		s = va_arg(p_args, void *);
-		l = (unsigned long) s;
-		if (l == 0)
-			write(1, "(nil)", 5);
-		else
-		{
-			write(1, "0x", 2);
-			ft_puthex(l, 0);
-		}
-	}
+		return (f_pointer(p_args));
 	else if (f == 'd' || f == 'i')
-	{
-		i = va_arg(p_args, int);
-		s = ft_itoa(i);
-		ft_putstr(s);
-	}
+		return (f_int(p_args));
 	else if (f == 'u')
-	{
-		u = va_arg(p_args, unsigned int);
-		s = ft_utoa(u);
-		ft_putstr(s);
-	}
-	else if (f == 'x')
-	{
-		u = va_arg(p_args, unsigned int);
-		ft_puthex(u, 0);
-	}
-	else if (f == 'X')
-	{
-		u = va_arg(p_args, unsigned int);
-		ft_puthex(u, 1);
-	}
+		return (f_unsigned(p_args));
+	else if (f == 'x' || f == 'X')
+		return (f_hex(p_args, f));
 	else if (f == '%')
-		write(1, "%%", 1);
+		return (write(1, "%%", 1));
 }
 
 int	ft_printf(const char *f, ...)
 {
 	va_list	p_args;
-	int		i;
+	int		c;
 
 	va_start(p_args, f);
-	i = 0;
-	while (f[i] != '\0')
+	c = 0;
+	while (*f != '\0')
 	{
-		if (f[i] == '%')
+		if (*f == '%' && *(f + 1) != '\0')
 		{
-			i++;
-			detect_format(p_args, f[i]);
+			f++;
+			c += detect_format(p_args, *f);
 		}
 		else
-		{
-			write(1, &f[i], 1);
-		}
-		i++;
+			c += write(1, f, 1);
+		f++;
 	}
-	return (i);
+	va_end(p_args);
+	return (c);
 }
 
-#include <stdio.h>
+// #include <stdio.h>
 
-int	main(void)
-{
-	unsigned int	numero;
-	unsigned int	*ponteiro;
+// int	main(void)
+// {
+// 	unsigned int	numero;
+// 	unsigned int	*ponteiro;
 
-	numero = 489;
-	ponteiro = &numero;
-	printf("teste%X\n", *ponteiro);
-	ft_printf("teste%X\n", *ponteiro);
-	ft_printf("teste%d\n", -2);
-	return (0);
-}
+// 	numero = 489;
+// 	ponteiro = &numero;
+// 	printf("teste%x e tst%d\n", *ponteiro, printf("opa%daa%p", 2, (void *) ponteiro));
+// 	ft_printf("teste%x e tst%d\n", *ponteiro, ft_printf("oft%daa%p", 2, (void *) ponteiro));
+// 	return (0);
+// }
