@@ -6,7 +6,7 @@
 /*   By: lucferre <lucferre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 03:32:36 by lucferre          #+#    #+#             */
-/*   Updated: 2026/07/10 03:18:13 by lucferre         ###   ########.fr       */
+/*   Updated: 2026/07/10 03:21:42 by lucferre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	f_int(va_list p_args)
 		return (-1);
 	len = ft_putstr(s);
 	free(s);
-	return(len);
+	return (len);
 }
 
 int	f_unsigned(va_list p_args)
