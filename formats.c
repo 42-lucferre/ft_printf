@@ -6,7 +6,7 @@
 /*   By: lucferre <lucferre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 03:32:36 by lucferre          #+#    #+#             */
-/*   Updated: 2026/07/10 01:46:00 by lucferre         ###   ########.fr       */
+/*   Updated: 2026/07/10 03:18:13 by lucferre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,15 @@ int	f_int(va_list p_args)
 {
 	int		i;
 	char	*s;
+	int		len;
 
 	i = va_arg(p_args, int);
 	s = ft_itoa(i);
 	if (!s)
 		return (-1);
-	return (ft_putstr(s));
+	len = ft_putstr(s);
+	free(s);
+	return(len);
 }
 
 int	f_unsigned(va_list p_args)
@@ -74,10 +77,12 @@ int	f_unsigned(va_list p_args)
 int	f_hex(va_list p_args, char f)
 {
 	unsigned int	u;
+	unsigned long	l;
 
 	u = va_arg(p_args, unsigned int);
+	l = (unsigned long) u;
 	if (f == 'x')
-		return (ft_puthex(u, 0));
+		return (ft_puthex(l, 0));
 	else
-		return (ft_puthex(u, 1));
+		return (ft_puthex(l, 1));
 }

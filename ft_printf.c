@@ -6,7 +6,7 @@
 /*   By: lucferre <lucferre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/04 16:23:33 by lucferre          #+#    #+#             */
-/*   Updated: 2026/07/10 01:46:57 by lucferre         ###   ########.fr       */
+/*   Updated: 2026/07/10 03:07:23 by lucferre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_putstr(char *p)
 	return (c);
 }
 
-int	ft_puthex(long n, int u)
+int	ft_puthex(unsigned long n, int u)
 {
 	char	*base;
 	int		c;
