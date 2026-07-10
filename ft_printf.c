@@ -6,7 +6,7 @@
 /*   By: lucferre <lucferre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/04 16:23:33 by lucferre          #+#    #+#             */
-/*   Updated: 2026/07/09 23:14:30 by lucferre         ###   ########.fr       */
+/*   Updated: 2026/07/09 23:20:29 by lucferre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ int	ft_printf(const char *f, ...)
 // int	main(void)
 // {
 // 	unsigned int	numero;
-// 	unsigned int	*ponteiro;
+// 	unsigned int	*point;
 
 // 	numero = 489;
-// 	ponteiro = &numero;
-// 	printf("teste%x e tst%d\n", *ponteiro, printf("opa%daa%p", 2, (void *) ponteiro));
-// 	ft_printf("teste%x e tst%d\n", *ponteiro, ft_printf("oft%daa%p", 2, (void *) ponteiro));
+// 	point = &numero;
+// 	printf("teste%x\n", numero, printf("opa%daa%p", 2, (void *) point));
+// 	ft_printf("teste%x\n", numero, ft_printf("oft%daa%p", 2, (void *) point));
 // 	return (0);
 // }
