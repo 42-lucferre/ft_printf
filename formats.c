@@ -6,7 +6,7 @@
 /*   By: lucferre <lucferre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 03:32:36 by lucferre          #+#    #+#             */
-/*   Updated: 2026/07/09 22:55:31 by lucferre         ###   ########.fr       */
+/*   Updated: 2026/07/10 01:46:00 by lucferre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	f_pointer(va_list p_args)
 {
 	char			*s;
 	unsigned long	l;
+	int				c;
 
 	s = va_arg(p_args, void *);
 	l = (unsigned long) s;
@@ -36,10 +37,10 @@ int	f_pointer(va_list p_args)
 	{
 		if (write(1, "0x", 2) == -1)
 			return (-1);
-		l = ft_puthex(l, 0);
-		if (l == -1)
+		c = ft_puthex(l, 0);
+		if (c == -1)
 			return (-1);
-		return (l + 2);
+		return (c + 2);
 	}
 }
 

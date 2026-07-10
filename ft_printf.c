@@ -6,7 +6,7 @@
 /*   By: lucferre <lucferre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/04 16:23:33 by lucferre          #+#    #+#             */
-/*   Updated: 2026/07/09 23:20:29 by lucferre         ###   ########.fr       */
+/*   Updated: 2026/07/10 01:46:57 by lucferre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static int	detect_format(va_list p_args, char f)
 		return (f_hex(p_args, f));
 	else if (f == '%')
 		return (write(1, "%%", 1));
+	return (-1);
 }
 
 int	ft_printf(const char *f, ...)
@@ -88,15 +89,16 @@ int	ft_printf(const char *f, ...)
 }
 
 // #include <stdio.h>
+// #include "ft_printf.h"
 
 // int	main(void)
 // {
-// 	unsigned int	numero;
+// 	unsigned int	n;
 // 	unsigned int	*point;
 
-// 	numero = 489;
-// 	point = &numero;
-// 	printf("teste%x\n", numero, printf("opa%daa%p", 2, (void *) point));
-// 	ft_printf("teste%x\n", numero, ft_printf("oft%daa%p", 2, (void *) point));
+// 	n = 489;
+// 	point = &n;
+// 	printf("teste%xl%d\n", n, printf("opa%daa%p", 2, (void *) point));
+// 	ft_printf("teste%xl%d\n", n, ft_printf("oft%daa%p", 2, (void *) point));
 // 	return (0);
 // }
