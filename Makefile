@@ -6,7 +6,7 @@
 #    By: lucferre <lucferre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/07/10 01:19:31 by lucferre          #+#    #+#              #
-#    Updated: 2026/07/10 01:19:47 by lucferre         ###   ########.fr        #
+#    Updated: 2026/07/10 04:47:08 by lucferre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,25 +19,47 @@ SRC = ft_printf.c ft_utoa.c formats.c
 OBJ = $(SRC:.c=.o)
 HEADER = ft_printf.h
 
+# Colors
+
+DEF_COLOR = \033[0;39m
+GRAY = \033[0;90m
+RED = \033[0;91m
+ORANGE = \033[0;33m
+GREEN = \033[0;92m
+YELLOW = \033[0;93m
+BLUE = \033[0;94m
+MAGENTA = \033[0;95m
+CYAN = \033[0;96m
+WHITE = \033[0;97m
+
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	cp $(LIBFT) $(NAME)
-	ar rcs $(NAME) $(OBJ)
+	@cp $(LIBFT) $(NAME)
+	@ar rcs $(NAME) $(OBJ)
+	@echo "\n$(GREEN)libftprintf.a compiled! $(DEF_COLOR)\n"
 
 %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@echo -n "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+	@echo "$(GREEN)[OK] $(DEF_COLOR)"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
-	make -C $(LIBFT_DIR) all
+	@echo "$(YELLOW)\nCompiling Libft $(DEF_COLOR)"
+	@make -C $(LIBFT_DIR) all --no-print-directory
+	@echo "$(GREEN)Libft compiled\n $(DEF_COLOR)"
 
 clean:
-	rm -f $(OBJ) *.gch
-	make -C $(LIBFT_DIR) clean
+	@echo -n "$(CYAN)\nRemoving object files $(DEF_COLOR)"
+	@rm -f $(OBJ) *.gch
+	@make -C $(LIBFT_DIR) clean --no-print-directory
+	@echo "$(GREEN)[OK] $(DEF_COLOR)"
 
 fclean: clean
-	rm -f $(NAME)
-	make -C $(LIBFT_DIR) fclean
+	@echo -n "$(RED)Removing .a files $(DEF_COLOR)"
+	@rm -f $(NAME)
+	@make -C $(LIBFT_DIR) fclean --no-print-directory
+	@echo "$(GREEN)[OK] $(DEF_COLOR)"
 
 re: fclean all
 
