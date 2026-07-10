@@ -6,7 +6,7 @@
 #    By: lucferre <lucferre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/07/10 01:19:31 by lucferre          #+#    #+#              #
-#    Updated: 2026/07/10 04:47:08 by lucferre         ###   ########.fr        #
+#    Updated: 2026/07/10 04:50:56 by lucferre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,12 +41,13 @@ $(NAME): $(LIBFT) $(OBJ)
 
 %.o: %.c $(HEADER)
 	@echo -n "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-	@echo "$(GREEN)[OK] $(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(GREEN)[OK] $(DEF_COLOR)"
 
 $(LIBFT):
-	@echo "$(YELLOW)\nCompiling Libft $(DEF_COLOR)"
+	@echo -n "$(YELLOW)\nCompiling Libft $(DEF_COLOR)"
 	@make -C $(LIBFT_DIR) all --no-print-directory
+	@echo "$(GREEN)[OK] $(DEF_COLOR)"
 	@echo "$(GREEN)Libft compiled\n $(DEF_COLOR)"
 
 clean:
