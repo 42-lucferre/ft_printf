@@ -125,6 +125,6 @@ cc <your_file.c> -I./ft_printf -L./Libft -lftprintf -o <output_name>
 
 ## Resources
 
-"__man__" used on Linux terminal and internet forums such as Stack Overflow were the primaries sources of information.
+"__man__" used on Linux terminal and internet forums such as Stack Overflow were the primary sources of information.
 
 AI was used as a secondary learning tool.
